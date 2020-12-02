@@ -3,19 +3,23 @@ package com.example.desafiowebservices_digitalhousemobile.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.desafiowebservices_digitalhousemobile.R
-import kotlinx.android.synthetic.main.activity_register.*
+import com.example.desafiowebservices_digitalhousemobile.databinding.ActivityRegisterBinding
+
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        toolbar_registro.setNavigationOnClickListener {
+        binding.toolbarRegistro.setNavigationOnClickListener {
             onBackPressed()
         }
 
-        btn_salvar_registro.setOnClickListener {
+        binding.btnSalvarRegistro.setOnClickListener {
             val intent = Intent(application, HqActivity::class.java)
             startActivity(intent)
         }

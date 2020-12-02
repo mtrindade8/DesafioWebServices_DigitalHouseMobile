@@ -2,35 +2,45 @@ package com.example.desafiowebservices_digitalhousemobile.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.bumptech.glide.Glide
-import com.example.desafiowebservices_digitalhousemobile.R
+import com.example.desafiowebservices_digitalhousemobile.adapters.CapaDialogAdapter
+import com.example.desafiowebservices_digitalhousemobile.databinding.ActivityDetalheHqBinding
 import com.example.desafiowebservices_digitalhousemobile.entities.Hq
-import kotlinx.android.synthetic.main.activity_detalhe_hq.*
+
 
 class DetalheHqActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityDetalheHqBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detalhe_hq)
+        binding = ActivityDetalheHqBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val hq = intent.getSerializableExtra("hq") as Hq
 
         Glide.with(this).asBitmap()
-            .load(hq.thumbnail.getThumbnailPath())
-            .into(img_capa_detalhe_hq)
+            .load(hq.thumbnail.getThumbnailPath().replace("http", "https"))
+            .into(binding.imgCapaDetalheHq)
 
         Glide.with(this).asBitmap()
-            .load(hq.thumbnail.getThumbnailPath())
-            .into(img_fundo_detalhe_hq)
+            .load(hq.thumbnail.getThumbnailPath().replace("http", "https"))
+            .into(binding.imgFundoDetalheHq)
 
-        txt_titulo_detalhe_hq.text = hq.title
-        txt_descricao_detalhe_hq.text = hq.description
-        txt_publicacao_detalhe_hq.text = hq.dates[0].date
-        txt_preco_detalhe_hq.text = hq.prices[0].price.toString()
-        txt_paginas_detalhe_hq.text = hq.pageCount.toString()
+        binding.txtTituloDetalheHq.text = hq.title
+        binding.txtDescricaoDetalheHq.text = hq.description
+        binding.txtPublicacaoDetalheHq.text = hq.dates[0].getFormattedDate()
+        binding.txtPrecoDetalheHq.text = hq.prices[0].price.toString()
+        binding.txtPaginasDetalheHq.text = hq.pageCount.toString()
 
-        toolbar_detalhe_hq.setNavigationOnClickListener {
+        binding.toolbarDetalheHq.setNavigationOnClickListener {
             onBackPressed()
+        }
+
+        var capaDetalheDialog = CapaDialogAdapter.newInstance(hq.thumbnail.getThumbnailPath())
+
+        binding.imgCapaDetalheHq.setOnClickListener {
+            capaDetalheDialog.show(supportFragmentManager, "capaDialog")
         }
 
     }

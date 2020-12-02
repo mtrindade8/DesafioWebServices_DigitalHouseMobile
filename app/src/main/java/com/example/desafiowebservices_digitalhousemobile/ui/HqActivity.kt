@@ -6,17 +6,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.desafiowebservices_digitalhousemobile.R
 import com.example.desafiowebservices_digitalhousemobile.adapters.HqAdapter
 import com.example.desafiowebservices_digitalhousemobile.contract.OnClickItemListener
+import com.example.desafiowebservices_digitalhousemobile.databinding.ActivityHqBinding
 import com.example.desafiowebservices_digitalhousemobile.models.HqViewModel
 import com.example.desafiowebservices_digitalhousemobile.services.repository
-import kotlinx.android.synthetic.main.activity_hq.*
-import java.util.Observer
+
 
 class HqActivity : AppCompatActivity(), OnClickItemListener {
+
+    private lateinit var binding: ActivityHqBinding
 
     val viewModel by viewModels<HqViewModel>{
         object : ViewModelProvider.Factory{
@@ -30,10 +29,11 @@ class HqActivity : AppCompatActivity(), OnClickItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hq)
+        binding = ActivityHqBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapter = HqAdapter(this)
-        rcv_container_hq.adapter = adapter
+        binding.rcvContainerHq.adapter = adapter
 
         viewModel.hqList.observe(this){
             adapter.addList(it)
