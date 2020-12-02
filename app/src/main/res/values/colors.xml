@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brancoMarvel">#FFFFFFFF</color>
+    <color name="vermelhoMarvel">#EA2427</color>
+    <color name="vermelhoEscuroMarvel">#BB1C1F</color>
+    <color name="azulClaroMarvel">#343F4B</color>
+    <color name="azulMarvel">#00162C</color>
 </resources>
