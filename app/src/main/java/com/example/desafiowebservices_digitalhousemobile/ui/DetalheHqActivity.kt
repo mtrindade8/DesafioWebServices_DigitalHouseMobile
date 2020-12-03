@@ -28,7 +28,7 @@ class DetalheHqActivity : AppCompatActivity() {
             .into(binding.imgFundoDetalheHq)
 
         binding.txtTituloDetalheHq.text = hq.title
-        binding.txtDescricaoDetalheHq.text = hq.description
+        binding.txtDescricaoDetalheHq.text = hq.description ?: "No Description."
         binding.txtPublicacaoDetalheHq.text = hq.dates[0].getFormattedDate()
         binding.txtPrecoDetalheHq.text = hq.prices[0].price.toString()
         binding.txtPaginasDetalheHq.text = hq.pageCount.toString()
